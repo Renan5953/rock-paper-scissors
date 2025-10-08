@@ -14,24 +14,29 @@ function getHumanChoice() {
     return choice;
 }
 
+function capitalize(word) {
+    return word.at(0).toUpperCase() + word.slice(1);
+}
+
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
     function playRound(humanChoice, computerChoice) {
         let lowerCase = humanChoice.toLowerCase();
-        if (lowerCase == 'rock' && computerChoice == 'scissors' || lowerCase == 'paper' && computerChoice == 'rock' || lowerCase == 'scissors' && computerChoice == 'paper') {
-            humanScore++;
-            let firstLetter = lowerCase.at(0);
-            let capitalizedFirst = firstLetter.toUpperCase();
-            let capitalized = lowerCase.replace(lowerCase.at(0), capitalizedFirst);
-            return `You win! ${capitalized} beats ${computerChoice}.`;
-        } else if (lowerCase == 'rock' && computerChoice == 'paper' || lowerCase == 'paper' && computerChoice == 'scissors' || lowerCase == 'scissors' && computerChoice == 'rock') {
+
+        if ((lowerCase === 'rock' && computerChoice === 'scissors') ||
+            (lowerCase === 'paper' && computerChoice === 'rock') ||
+            (lowerCase === 'scissors' && computerChoice === 'paper')) {
+                humanScore++;
+                return `You win! ${capitalize(lowerCase)} beats ${computerChoice}.`;
+
+        } else if ((lowerCase === 'rock' && computerChoice === 'paper') ||
+                   (lowerCase === 'paper' && computerChoice === 'scissors') ||
+                   (lowerCase === 'scissors' && computerChoice === 'rock')) {
             computerScore++;
-            let firstLetter = computerChoice.at(0);
-            let capitalizedFirst = firstLetter.toUpperCase();
-            let capitalized = computerChoice.replace(computerChoice.at(0), capitalizedFirst);
-            return `You lose! ${capitalized} beats ${lowerCase}.`;
+            return `You lose! ${capitalize(computerChoice)} beats ${lowerCase}.`;
+
         } else {
             return "It's a tie!";
         }
